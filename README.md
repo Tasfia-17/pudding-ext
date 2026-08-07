@@ -5,6 +5,7 @@
 [![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-4285F4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://github.com/Tasfia-17/pudding-ext)
 [![IncludAI Hackathon](https://img.shields.io/badge/IncludAI-Stanford%20NNEA-8B5CF6?style=for-the-badge)](https://includai.devpost.com)
 [![Track 1](https://img.shields.io/badge/Track%201-AI%20for%20Learners-FF6B6B?style=for-the-badge)](https://github.com/Tasfia-17/pudding-ext)
+[![HydraDB](https://img.shields.io/badge/Memory-HydraDB-0EA5E9?style=for-the-badge)](https://hydradb.com)
 [![Multilingual](https://img.shields.io/badge/10-Languages-success?style=for-the-badge)](https://github.com/Tasfia-17/pudding-ext)
 [![Offline AI](https://img.shields.io/badge/100%25-Offline-success?style=for-the-badge)](https://github.com/Tasfia-17/pudding-ext)
 [![Privacy First](https://img.shields.io/badge/Privacy-First-blueviolet?style=for-the-badge)](https://github.com/Tasfia-17/pudding-ext)
@@ -470,8 +471,96 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
+## 🧠 Powered by HydraDB
+
+Pudding uses [HydraDB](https://hydradb.com) as its unified context substrate — the memory layer that makes cognitive adaptation actually *persist* across sessions and *personalize* to each user over time.
+
+### The Problem HydraDB Solves for Us
+
+Pudding's adaptation engine needs to remember things: how fast you read, which simplification level worked last time, which sites overwhelmed you, and how your fatigue patterns shift through the day. Without persistent memory, every session starts from zero and the "adaptive" part of Cognitive Adaptation Engine is effectively a lie.
+
+Standard vector search wasn't enough. It finds similar text — it can't answer "how has this user's reading behavior changed over the last week?" or return different context to a student vs. a teacher querying the same article. We needed a context layer that holds **user memories**, **semantic knowledge**, and **episodic experiences** in one place.
+
+HydraDB gave us exactly that.
+
+### What We Store
+
+| Memory type | What Pudding writes | HydraDB call |
+|---|---|---|
+| **User preferences** | Preferred simplification level, font, language, focus mode settings | `hydradb_ingest` (text, `infer: true`) |
+| **Reading sessions** | Per-site scroll speed, pause patterns, reread counts, fatigue events | `hydradb_ingest` (turns / episodic) |
+| **Adaptation outcomes** | Which restructuring mode improved comprehension on a given content type | `hydradb_ingest` with `source_id` per domain |
+| **Cognitive profile** | Aggregated reading behavior over time, built automatically by HydraDB's graph | auto-inferred by HydraDB |
+
+### How We Query
+
+When you open a new page, Pudding calls `hydradb_query` before applying any transformation:
+
+```js
+// Retrieve personalized context before adapting content
+const context = await hydradb.query({
+  query: "reading preferences and fatigue history for this user",
+  mode: "thinking",        // graph traversal — not just similarity
+  graph_context: true      // pull entity relationships, not just chunks
+});
+```
+
+The `thinking` recall mode (vs. `fast`) uses graph traversal to surface *relevant* history, not just *similar* text — so Pudding gets "this user struggles with dense academic paragraphs on news sites" rather than a raw list of past sessions.
+
+### Session Ingestion
+
+At the end of each reading session, Pudding ingests the interaction as a conversation turn:
+
+```js
+await hydradb.ingest({
+  turns: sessionTurns,      // user actions + extension responses
+  title: `Session: ${domain}`,
+  source_id: userId,        // groups all sessions per user
+  infer: true               // HydraDB extracts preferences + updates graph
+});
+```
+
+HydraDB's automatic knowledge graph extraction means we never have to hand-write "this user has ADHD-style focus patterns" — it infers those relationships from accumulated session data.
+
+### MCP Integration (Dev Tooling)
+
+During development and testing we used the [HydraDB MCP server](https://github.com/usecortex/hydradb-mcp) to inspect and query the memory store directly from our editor:
+
+```json
+{
+  "mcpServers": {
+    "hydradb": {
+      "command": "npx",
+      "args": ["-y", "@hydradb/mcp@latest"],
+      "env": {
+        "HYDRADB_API_KEY": "your-api-key",
+        "HYDRADB_DATABASE": "pudding-dev"
+      }
+    }
+  }
+}
+```
+
+This let us run `hydradb_list`, `hydradb_inspect`, and `hydradb_query` directly during debugging to verify that user profiles were being built correctly without writing separate test scripts.
+
+We also used the [HydraDB CLI](https://github.com/usecortex/hydradb-cli) to bulk-inspect stored sessions and validate that the cognitive profile graph was accumulating correctly after test runs.
+
+### Why It Mattered for Accessibility
+
+The neurodivergent users we tested with have *highly variable* needs — not just user-to-user, but session-to-session for the same person (fatigue, time of day, content type). A static preference file doesn't cut it.
+
+HydraDB's episodic memory layer — which retains time-ordered events from every agent interaction — is what lets Pudding's smart auto-mode detect "this user tends to need higher simplification after 20 minutes of reading" and act on it proactively, before the user has to ask.
+
+**Resources:**
+- 📖 [HydraDB Docs](https://docs.hydradb.com)
+- 🔌 [HydraDB MCP Server](https://github.com/usecortex/hydradb-mcp)
+- 🖥️ [HydraDB CLI](https://github.com/usecortex/hydradb-cli)
+
+---
+
 ## Acknowledgments
 
+- **HydraDB** for the unified context substrate powering adaptive memory
 - **Chrome AI Team** for Gemini Nano
 - **OpenDyslexic** for the accessibility font
 - **Accessibility Community** for feedback and inspiration
