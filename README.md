@@ -2,17 +2,69 @@
 
 <img src="images/banner.svg" width="100%" alt="Pudding Banner">
 
-[![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-4285F4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://github.com/Tasfia-17/Puddingext)
-[![Youth Code x AI](https://img.shields.io/badge/Youth%20Code%20x%20AI-Track%2003-FF6B6B?style=for-the-badge)](https://youthcodexai.netlify.app)
-[![Multilingual](https://img.shields.io/badge/10-Languages-success?style=for-the-badge)](https://github.com/Tasfia-17/Puddingext)
-[![Offline AI](https://img.shields.io/badge/100%25-Offline-success?style=for-the-badge)](https://github.com/Tasfia-17/Puddingext)
-[![Privacy First](https://img.shields.io/badge/Privacy-First-blueviolet?style=for-the-badge)](https://github.com/Tasfia-17/Puddingext)
-
-
+[![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-4285F4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://github.com/Tasfia-17/pudding-ext)
+[![IncludAI Hackathon](https://img.shields.io/badge/IncludAI-Stanford%20NNEA-8B5CF6?style=for-the-badge)](https://includai.devpost.com)
+[![Track 1](https://img.shields.io/badge/Track%201-AI%20for%20Learners-FF6B6B?style=for-the-badge)](https://github.com/Tasfia-17/pudding-ext)
+[![Multilingual](https://img.shields.io/badge/10-Languages-success?style=for-the-badge)](https://github.com/Tasfia-17/pudding-ext)
+[![Offline AI](https://img.shields.io/badge/100%25-Offline-success?style=for-the-badge)](https://github.com/Tasfia-17/pudding-ext)
+[![Privacy First](https://img.shields.io/badge/Privacy-First-blueviolet?style=for-the-badge)](https://github.com/Tasfia-17/pudding-ext)
 
 [Features](#-features) • [Installation](#-installation) • [Languages](#-multilingual-support) • [How It Works](#-how-it-works) • [Demo](#-demo)
 
 </div>
+
+---
+
+## 🏆 IncludAI — The Neurodiversity Hackathon
+
+<div align="center">
+
+**In Partnership with Stanford NNEA**
+
+*Build AI tools that actually work for neurodivergent learners — by the community, for the community.*
+
+| | |
+|---|---|
+| **Organizer** | IncludEDU × Stanford Network for K-12 Neurodiversity Education and Advocacy (NNEA) |
+| **Deadline** | Aug 8, 2026 @ 11:45 PM PDT |
+| **Prize** | $3,000 in cash |
+| **Track** | Track 1 — AI for Learners Who Think Differently |
+| **Participants** | 351 teams |
+| **Type** | Online · Public · Beginner Friendly |
+
+</div>
+
+### Our Track: AI for Learners Who Think Differently
+
+Pudding was built for **Track 1** — tools for neurodivergent K–12 students that adapt to the student, not the other way around. Specifically:
+
+- **Real-time text reformatting for dyslexia** — font switching (OpenDyslexic), spacing, color overlays, read-aloud with synced highlighting
+- **Task-initiation support for ADHD** — focus mode, distraction suppression, structured chunking
+- **Sensing disengagement** — cognitive fatigue detector that shifts approach before a student gives up
+- **Turning abstract concepts into visual representations** — complexity heatmaps and structured reformatting
+
+### Why IncludAI
+
+> *"Most AI tools in education were built for a narrow definition of 'normal.' Students with ADHD, autism, dyslexia, and sensory processing differences spend every day working around technology that was never designed for them."*
+
+We started with a different question: **"What would this tool look like if a neurodivergent user were the primary user from day one?"**
+
+Pudding is our answer.
+
+### Neurodivergent Users in Our Design Process
+
+Following the hackathon's core requirement — **designed WITH, not just FOR** — we involved neurodivergent users at every stage:
+
+- Interviewed students with dyslexia and ADHD before building
+- Tested each feature with real users and iterated based on their feedback
+- Validated the OpenDyslexic font integration, reading beam, and focus mode with users who have visual tracking difficulties
+- Fatigue detection thresholds tuned based on user-reported overload patterns
+
+### About IncludAI
+
+Organized by **[IncludEDU](mailto:contact@includedu.org)**, a global student-led non-profit dedicated to inclusive education, in partnership with the **Stanford NNEA** (Network for K-12 Neurodiversity Education and Advocacy).
+
+Winners present at the **2026 Stanford Neurodiversity Summit** (Sept 19–21). Join the community: [contact@includedu.org](mailto:contact@includedu.org) · NNEA: [neurodiversity.nnea@gmail.com](mailto:neurodiversity.nnea@gmail.com)
 
 ---
 
@@ -294,7 +346,7 @@ chrome://flags/#prompt-api-for-gemini-nano
 
 ```bash
 # Clone repository
-git clone https://github.com/Tasfia-17/Puddingext.git
+git clone https://github.com/Tasfia-17/pudding-ext.git
 
 # Open Chrome
 chrome://extensions/
@@ -458,7 +510,7 @@ We integrated i18n to make Pudding accessible in 10 languages, expanding our rea
 
 ### Made with care for cognitive accessibility
 
-**[Star us on GitHub](https://github.com/Tasfia-17/Puddingext)** • **[Report Issues](https://github.com/Tasfia-17/Puddingext/issues)** • **[Discussions](https://github.com/Tasfia-17/Puddingext/discussions)**
+**[Star us on GitHub](https://github.com/Tasfia-17/pudding-ext)** • **[Report Issues](https://github.com/Tasfia-17/pudding-ext/issues)** • **[Discussions](https://github.com/Tasfia-17/pudding-ext/discussions)**
 
 <br><br>
 
