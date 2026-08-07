@@ -606,3 +606,52 @@ We integrated i18n to make Pudding accessible in 10 languages, expanding our rea
 <img src="images/pudding-logo.svg" width="80" alt="Pudding">
 
 </div>
+
+---
+
+## IncludAI - The Neurodiversity Hackathon
+
+**In Partnership with Stanford NNEA**
+
+Build AI tools that actually work for neurodivergent learners - by the community, for the community.
+
+| | |
+|---|---|
+| **Organizer** | IncludEDU x Stanford Network for K-12 Neurodiversity Education and Advocacy (NNEA) |
+| **Deadline** | Aug 8, 2026 @ 11:45 PM PDT |
+| **Prize** | $3,000 in cash |
+| **Track** | Track 1 - AI for Learners Who Think Differently |
+| **Participants** | 351 teams |
+| **Type** | Online · Public · Beginner Friendly |
+
+### Our Track: AI for Learners Who Think Differently
+
+Pudding was built for Track 1 - tools for neurodivergent K-12 students that adapt to the student, not the other way around. Specifically:
+
+- Real-time text reformatting for dyslexia - font switching (OpenDyslexic), spacing, color overlays, read-aloud with synced highlighting
+- Task-initiation support for ADHD - focus mode, distraction suppression, structured chunking
+- Sensing disengagement - cognitive fatigue detector that shifts approach before a student gives up
+- Turning abstract concepts into visual representations - complexity heatmaps and structured reformatting
+
+### Why IncludAI
+
+> "Most AI tools in education were built for a narrow definition of 'normal.' Students with ADHD, autism, dyslexia, and sensory processing differences spend every day working around technology that was never designed for them."
+
+We started with a different question: "What would this tool look like if a neurodivergent user were the primary user from day one?"
+
+Pudding is our answer.
+
+### Neurodivergent Users in Our Design Process
+
+Following the hackathon's core requirement - designed WITH, not just FOR - we involved neurodivergent users at every stage:
+
+- Interviewed students with dyslexia and ADHD before building
+- Tested each feature with real users and iterated based on their feedback
+- Validated the OpenDyslexic font integration, reading beam, and focus mode with users who have visual tracking difficulties
+- Fatigue detection thresholds tuned based on user-reported overload patterns
+
+### About IncludAI
+
+Organized by **IncludEDU**, a global student-led non-profit dedicated to inclusive education, in partnership with the **Stanford NNEA** (Network for K-12 Neurodiversity Education and Advocacy).
+
+Winners present at the 2026 Stanford Neurodiversity Summit (Sept 19-21). Join the community: [contact@includedu.org](mailto:contact@includedu.org) · NNEA: [neurodiversity.nnea@gmail.com](mailto:neurodiversity.nnea@gmail.com)
