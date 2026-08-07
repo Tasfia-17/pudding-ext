@@ -446,12 +446,6 @@ NNEA: [neurodiversity.nnea@gmail.com](mailto:neurodiversity.nnea@gmail.com)
 
 ---
 
-## License
-
-MIT License - see [LICENSE](LICENSE) for details.
-
----
-
 ## Acknowledgments
 
 - **HydraDB** for the persistent context and adaptive memory layer
@@ -459,6 +453,10 @@ MIT License - see [LICENSE](LICENSE) for details.
 - **Chrome AI Team** for Gemini Nano on-device AI
 - **OpenDyslexic** for the dyslexia-friendly font
 - **IncludEDU and Stanford NNEA** for running a hackathon that centers neurodivergent users
+
+## License
+
+MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
