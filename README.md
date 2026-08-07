@@ -16,20 +16,20 @@
 
 ---
 
-## 🏆 IncludAI — The Neurodiversity Hackathon
+## 🏆 IncludAI - The Neurodiversity Hackathon
 
 <div align="center">
 
 **In Partnership with Stanford NNEA**
 
-*Build AI tools that actually work for neurodivergent learners — by the community, for the community.*
+*Build AI tools that actually work for neurodivergent learners - by the community, for the community.*
 
 | | |
 |---|---|
 | **Organizer** | IncludEDU × Stanford Network for K-12 Neurodiversity Education and Advocacy (NNEA) |
 | **Deadline** | Aug 8, 2026 @ 11:45 PM PDT |
 | **Prize** | $3,000 in cash |
-| **Track** | Track 1 — AI for Learners Who Think Differently |
+| **Track** | Track 1 - AI for Learners Who Think Differently |
 | **Participants** | 351 teams |
 | **Type** | Online · Public · Beginner Friendly |
 
@@ -37,12 +37,12 @@
 
 ### Our Track: AI for Learners Who Think Differently
 
-Pudding was built for **Track 1** — tools for neurodivergent K–12 students that adapt to the student, not the other way around. Specifically:
+Pudding was built for **Track 1** - tools for neurodivergent K–12 students that adapt to the student, not the other way around. Specifically:
 
-- **Real-time text reformatting for dyslexia** — font switching (OpenDyslexic), spacing, color overlays, read-aloud with synced highlighting
-- **Task-initiation support for ADHD** — focus mode, distraction suppression, structured chunking
-- **Sensing disengagement** — cognitive fatigue detector that shifts approach before a student gives up
-- **Turning abstract concepts into visual representations** — complexity heatmaps and structured reformatting
+- **Real-time text reformatting for dyslexia** - font switching (OpenDyslexic), spacing, color overlays, read-aloud with synced highlighting
+- **Task-initiation support for ADHD** - focus mode, distraction suppression, structured chunking
+- **Sensing disengagement** - cognitive fatigue detector that shifts approach before a student gives up
+- **Turning abstract concepts into visual representations** - complexity heatmaps and structured reformatting
 
 ### Why IncludAI
 
@@ -54,7 +54,7 @@ Pudding is our answer.
 
 ### Neurodivergent Users in Our Design Process
 
-Following the hackathon's core requirement — **designed WITH, not just FOR** — we involved neurodivergent users at every stage:
+Following the hackathon's core requirement - **designed WITH, not just FOR** - we involved neurodivergent users at every stage:
 
 - Interviewed students with dyslexia and ADHD before building
 - Tested each feature with real users and iterated based on their feedback
@@ -96,7 +96,7 @@ Reading online content is challenging for millions of people. Complex language, 
 - **Cloud summarizers**: Privacy concerns, lose important context
 - **Reader modes**: Basic formatting, no intelligence
 
-**The gap**: No tool learns how YOU read and adapts content to YOUR cognitive style — **in YOUR language**.
+**The gap**: No tool learns how YOU read and adapts content to YOUR cognitive style - **in YOUR language**.
 
 ---
 
@@ -118,7 +118,7 @@ Pudding is a Cognitive Adaptation Engine that learns your reading patterns and t
 
 </div>
 
-**Pudding isn't just a text simplifier** — it's a **Cognitive Adaptation Engine** that learns how your brain reads and adapts content in real-time.
+**Pudding isn't just a text simplifier** - it's a **Cognitive Adaptation Engine** that learns how your brain reads and adapts content in real-time.
 
 <div align="center">
 
@@ -473,13 +473,13 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## 🧠 Powered by HydraDB
 
-Pudding uses [HydraDB](https://hydradb.com) as its unified context substrate — the memory layer that makes cognitive adaptation actually *persist* across sessions and *personalize* to each user over time.
+Pudding uses [HydraDB](https://hydradb.com) as its unified context substrate - the memory layer that makes cognitive adaptation actually *persist* across sessions and *personalize* to each user over time.
 
 ### The Problem HydraDB Solves for Us
 
 Pudding's adaptation engine needs to remember things: how fast you read, which simplification level worked last time, which sites overwhelmed you, and how your fatigue patterns shift through the day. Without persistent memory, every session starts from zero and the "adaptive" part of Cognitive Adaptation Engine is effectively a lie.
 
-Standard vector search wasn't enough. It finds similar text — it can't answer "how has this user's reading behavior changed over the last week?" or return different context to a student vs. a teacher querying the same article. We needed a context layer that holds **user memories**, **semantic knowledge**, and **episodic experiences** in one place.
+Standard vector search wasn't enough. It finds similar text - it can't answer "how has this user's reading behavior changed over the last week?" or return different context to a student vs. a teacher querying the same article. We needed a context layer that holds **user memories**, **semantic knowledge**, and **episodic experiences** in one place.
 
 HydraDB gave us exactly that.
 
@@ -500,12 +500,12 @@ When you open a new page, Pudding calls `hydradb_query` before applying any tran
 // Retrieve personalized context before adapting content
 const context = await hydradb.query({
   query: "reading preferences and fatigue history for this user",
-  mode: "thinking",        // graph traversal — not just similarity
+  mode: "thinking",        // graph traversal - not just similarity
   graph_context: true      // pull entity relationships, not just chunks
 });
 ```
 
-The `thinking` recall mode (vs. `fast`) uses graph traversal to surface *relevant* history, not just *similar* text — so Pudding gets "this user struggles with dense academic paragraphs on news sites" rather than a raw list of past sessions.
+The `thinking` recall mode (vs. `fast`) uses graph traversal to surface *relevant* history, not just *similar* text - so Pudding gets "this user struggles with dense academic paragraphs on news sites" rather than a raw list of past sessions.
 
 ### Session Ingestion
 
@@ -520,7 +520,7 @@ await hydradb.ingest({
 });
 ```
 
-HydraDB's automatic knowledge graph extraction means we never have to hand-write "this user has ADHD-style focus patterns" — it infers those relationships from accumulated session data.
+HydraDB's automatic knowledge graph extraction means we never have to hand-write "this user has ADHD-style focus patterns" - it infers those relationships from accumulated session data.
 
 ### MCP Integration (Dev Tooling)
 
@@ -547,9 +547,9 @@ We also used the [HydraDB CLI](https://github.com/usecortex/hydradb-cli) to bulk
 
 ### Why It Mattered for Accessibility
 
-The neurodivergent users we tested with have *highly variable* needs — not just user-to-user, but session-to-session for the same person (fatigue, time of day, content type). A static preference file doesn't cut it.
+The neurodivergent users we tested with have *highly variable* needs - not just user-to-user, but session-to-session for the same person (fatigue, time of day, content type). A static preference file doesn't cut it.
 
-HydraDB's episodic memory layer — which retains time-ordered events from every agent interaction — is what lets Pudding's smart auto-mode detect "this user tends to need higher simplification after 20 minutes of reading" and act on it proactively, before the user has to ask.
+HydraDB's episodic memory layer - which retains time-ordered events from every agent interaction - is what lets Pudding's smart auto-mode detect "this user tends to need higher simplification after 20 minutes of reading" and act on it proactively, before the user has to ask.
 
 **Resources:**
 - 📖 [HydraDB Docs](https://docs.hydradb.com)
