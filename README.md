@@ -10,7 +10,7 @@
 [![Offline AI](https://img.shields.io/badge/100%25-Offline-success?style=for-the-badge)](https://github.com/Tasfia-17/pudding-ext)
 [![Privacy First](https://img.shields.io/badge/Privacy-First-blueviolet?style=for-the-badge)](https://github.com/Tasfia-17/pudding-ext)
 
-[Features](#-features) • [Installation](#-installation) • [Languages](#-multilingual-support) • [How It Works](#-how-it-works) • [Demo](#-demo)
+[Problem](#the-problem) • [Solution](#the-solution) • [Features](#features) • [Architecture](#architecture) • [How We Built It](#how-we-built-it) • [Install](#installation) • [Hackathon](#includai-the-neurodiversity-hackathon)
 
 </div>
 
@@ -18,81 +18,68 @@
 
 ## The Problem
 
-Reading online content is challenging for millions of people. Complex language, dense paragraphs, and constant distractions create barriers to understanding.
+Reading online content is genuinely hard for a large part of the population. Complex academic language, dense paragraphs, no visual structure, and constant distractions create daily barriers that neurotypical readers barely notice but that neurodivergent readers deal with on every single page.
 
 <div align="center">
-
 <img src="images/problem-diagram.svg" width="100%" alt="The Problem">
-
 </div>
 
-### Who Struggles?
+**8.4 million people with dyslexia** experience words that jumble, lines that blur together, and text that drifts across the page as they read. Standard fonts and default web layouts make this worse, not better.
 
-**8.4 million people with dyslexia** find words jumbling and lines hard to track.
+**6.4 million people with ADHD** lose focus within seconds of encountering a wall of text, sidebars pulling their attention, or a paragraph that buries the point under three sentences of preamble. They are not bad readers. The web was designed without them in mind.
 
-**6.4 million people with ADHD** lose focus amid distractions and dense text.
+**Millions more** with autism, sensory processing differences, or acquired cognitive difficulties face abstract jargon, unexplained concepts, and information density that assumes a very specific kind of prior knowledge and processing style.
 
-**Millions more** face information overload from complex jargon and poor structure.
+The tools that exist today do not solve this. Text-to-speech reads words out loud but does nothing about comprehension. Font changers swap typefaces but leave complex language untouched. Cloud summarizers send your reading history to remote servers and strip out context. Browser reader modes clean up visual clutter but add no intelligence. None of them adapt to you. None of them learn from one session to the next. None of them work across languages.
 
-### Current Solutions Fall Short
-
-- **Text-to-speech**: Robotic, no comprehension aid
-- **Font changers**: Surface-level, doesn't address complexity
-- **Cloud summarizers**: Privacy concerns, lose important context
-- **Reader modes**: Basic formatting, no intelligence
-
-**The gap**: No tool learns how YOU read and adapts content to YOUR cognitive style - **in YOUR language**.
+The real gap is this: no tool exists that learns how a specific person reads, identifies where they struggle, adjusts content complexity in real time to match their cognitive state right now, and does all of this privately and offline.
 
 ---
 
-## The Solution: Pudding
+## The Solution
 
-Pudding is a Cognitive Adaptation Engine that learns your reading patterns and transforms content in real-time  available in 10 languages.
+Pudding is a Chrome extension that acts as a Cognitive Adaptation Engine. It does not apply a fixed transformation to every page. It observes how you read, builds a picture of your patterns and preferences, and adapts the content of any webpage to match your cognitive style at the moment you are reading it.
 
 <div align="center">
-
 <img src="images/solution-diagram.svg" width="100%" alt="The Solution">
-
 </div>
 
-<br>
+The difference from every existing tool is personalization over time. Pudding gets more useful the more you use it. On your first session it applies sensible defaults. By your tenth session it knows that you prefer mid-level simplification on news sites, that you need high simplification on academic content after 7pm, and that you always re-read the second paragraph of dense articles before moving on. It uses that knowledge to set things up before you even ask.
 
 <div align="center">
-
 <img src="images/before-after.svg" width="100%" alt="Before and After Pudding">
-
 </div>
 
-**Pudding isn't just a text simplifier** - it's a **Cognitive Adaptation Engine** that learns how your brain reads and adapts content in real-time.
+It also runs entirely on your device. No content leaves your browser. No API calls to remote servers. No account required. Your reading history is yours.
 
 <div align="center">
-
 <img src="images/pudding-mascots.svg" width="400" alt="Pudding Mascots">
-
 </div>
 
-### What Makes Pudding Different
+### Pudding vs Everything Else
 
 <table>
 <tr>
 <td width="50%">
 
-**Traditional Tools**
-- ❌ One-size-fits-all
-- ❌ Cloud processing (privacy risk)
-- ❌ Static simplification
-- ❌ Loses context
-- ❌ English only
+**Traditional tools**
+- One-size-fits-all transformation
+- Cloud processing with privacy risk
+- Static, non-learning simplification
+- Loses important context
+- English only
+- Resets every session
 
 </td>
 <td width="50%">
 
 **Pudding**
-- ✅ Learns your reading style
-- ✅ 100% offline (private)
-- ✅ Adaptive intelligence
-- ✅ Preserves full content
-- ✅ **10 languages with Lingo.dev**
+- Learns your specific reading style
+- 100% offline, no data leaves device
+- Adaptive intelligence that improves over time
+- Preserves full context and meaning
+- 10 languages via Lingo.dev
+- Persistent memory across sessions via HydraDB
 
 </td>
 </tr>
@@ -102,374 +89,168 @@ Pudding is a Cognitive Adaptation Engine that learns your reading patterns and t
 
 ## Features
 
-### 1. Cognitive Adaptation Engine
+### Cognitive Adaptation Engine
+
+The core of Pudding is a system that tracks your reading behavior locally and uses it to decide how much to simplify content, which mode to use, and when to intervene proactively.
 
 <div align="center">
-
-<img src="images/architecture.svg" width="600" alt="How Pudding Works">
-
-</div>
-
-**Learns your reading patterns:**
-- Tracks scroll speed, pauses, and rereads (all stored locally)
-- Auto-adjusts simplification level based on behavior
-- Gets smarter over time
-- All data stays on your device (100% private)
-
-<div align="center">
-
 <img src="images/adaptive-learning.svg" width="700" alt="Adaptive Learning Over Time">
-
 </div>
 
-### 2. Focus Mode
+It tracks scroll speed to detect when you are struggling with a passage, pause duration to identify sections that require re-reading, backward scrolls that indicate confusion, and overall session fatigue as reading time accumulates. All of this happens locally in the extension. None of it is uploaded anywhere.
 
-**Eliminate distractions instantly:**
-- Blurs sidebars and navigation
-- Hides ads and comments  
-- Spotlights current paragraph
-- Keyboard navigation (up/down arrows)
+Over time the engine learns your pattern. When it detects that you are entering a fatigue state, it automatically raises the simplification level before you have to ask. When you are reading comfortably it stays out of the way.
 
-### 3. Complexity Mapping
+### Focus Mode
 
-**See difficulty at a glance:**
-- Color-coded complexity scores (0-100)
-- Visual heatmap of content difficulty
-- Click any hard section to simplify just that part
-- Detects jargon and abstract language
+Web pages are built to distract you. Ads, sidebars, comment sections, related articles, navigation bars, floating headers, and cookie banners all compete for attention on every page. For someone with ADHD, this is not a minor annoyance. It is a barrier to reading anything at all.
+
+Focus Mode removes all of it with one click. Sidebars blur out. Ads disappear. The current paragraph is spotlit while everything else recedes. You navigate through the article using the up and down arrow keys, moving the spotlight one paragraph at a time. There is nothing else to look at.
+
+### Complexity Mapping
+
+Not every paragraph on a page is equally hard. Pudding scores every section of text from 0 to 100 based on sentence length, word frequency, jargon density, and abstraction level. It renders this as a color-coded heatmap overlaid on the page so you can see at a glance where the hard parts are before you get to them.
 
 <div align="center">
-
 <img src="images/complexity-heatmap.svg" width="700" alt="Complexity Heatmap">
-
 </div>
 
-### 4. Smart Content Restructuring
+Clicking any high-complexity badge runs simplification on just that section without touching the rest of the article. This gives you surgical control rather than applying a blunt transformation to everything.
+
+### Smart Content Restructuring
+
+Dense paragraphs get restructured into a format that is much easier to process. A long paragraph that buries the main point becomes a key point callout followed by bulleted supporting details. Abstract explanations get an inline summary. Important numbers and quoted text get visual emphasis.
 
 **Before:**
 ```
 Long, dense paragraph with multiple complex ideas 
 crammed together making it hard to follow the main 
-points and causing cognitive overload...
+points and causing cognitive overload for the reader.
 ```
 
 **After:**
 ```
-📌 Key Point: Main idea summarized
+Key Point: Main idea summarized clearly upfront
 
-• First concept explained simply
-• Second concept broken down
-• Third concept clarified
+- First concept explained simply
+- Second concept broken down
+- Third concept clarified
 
-💡 Why this matters: Context provided
+Why this matters: Context provided
 ```
 
-**Features:**
-- Converts paragraphs into bullet lists
-- Creates collapsible sections
-- Highlights key numbers and quotes
-- Adds inline summaries
+### Fatigue Detection
 
----
+Pudding monitors behavioral signals that indicate cognitive fatigue building up during a session: increasing pause lengths, more frequent re-reads, slowing scroll speed, and shorter time spent on each paragraph before moving on. When these signals cross a threshold, it notifies you and offers to increase simplification, switch to a more structured layout, or suggest a short break. The thresholds were calibrated directly with neurodivergent users during testing.
 
-## How It Works
+### Multilingual Support
+
+Pudding supports 10 languages through Lingo.dev integration. The full UI, all simplification output, labels, tooltips, and settings are available in English, Spanish, French, German, Arabic (with full RTL support), Chinese, Japanese, Hindi, Portuguese, and Bengali.
 
 <div align="center">
-
-<img src="images/architecture.svg" width="600" alt="Architecture">
-
-</div>
-
-### The Process
-
-1. **Content Analysis** - Pudding scans the page structure
-2. **Cognitive Tracking** - Monitors your reading behavior
-3. **AI Processing** - Chrome's built-in Gemini Nano simplifies text
-4. **Smart Adaptation** - Applies optimal transformations
-5. **Real-time Updates** - Content adapts as you read
-
-### Privacy-First Design
-
-- 100% offline processing
-- Local data storage only
-- No external API calls
-- Zero tracking or analytics
-
-<div align="center">
-
-<img src="images/privacy-architecture.svg" width="600" alt="Privacy Architecture">
-
-</div>
-
----
-
-## 🌍 Multilingual Support
-
-Pudding now supports **10 languages** thanks to [Lingo.dev](https://lingo.dev) integration:
-
-<div align="center">
-
 <img src="images/global-reach.svg" width="800" alt="Global Multilingual Reach">
-
 </div>
+
+| Language | Code | Speakers |
+|----------|------|----------|
+| English | `en` | 1.5B |
+| Spanish | `es` | 559M |
+| French | `fr` | 280M |
+| German | `de` | 134M |
+| Arabic | `ar` | 422M |
+| Chinese | `zh` | 1.3B |
+| Japanese | `ja` | 125M |
+| Hindi | `hi` | 602M |
+| Portuguese | `pt` | 264M |
+| Bengali | `bn` | 272M |
+
+Translations load in under 10ms with zero performance impact. Language preference is saved and restored automatically. Details in [LINGO_INTEGRATION.md](LINGO_INTEGRATION.md).
+
+---
+
+## Architecture
+
+Pudding is structured as a Chrome extension with four layers that work together: the content layer running in the page, the background service worker managing state and AI calls, the popup UI for user controls, and the persistent memory layer backed by HydraDB.
 
 <div align="center">
-
-| Language | Code | Native Name | Speakers |
-|----------|------|-------------|----------|
-| 🇬🇧 English | `en` | English | 1.5B |
-| 🇪🇸 Spanish | `es` | Español | 559M |
-| 🇫🇷 French | `fr` | Français | 280M |
-| 🇩🇪 German | `de` | Deutsch | 134M |
-| 🇸🇦 Arabic | `ar` | العربية | 422M |
-| 🇨🇳 Chinese | `zh` | 中文 | 1.3B |
-| 🇯🇵 Japanese | `ja` | 日本語 | 125M |
-| 🇮🇳 Hindi | `hi` | हिन्दी | 602M |
-| 🇵🇹 Portuguese | `pt` | Português | 264M |
-| 🇧🇩 Bengali | `bn` | বাংলা | 272M |
-
-**Total Reach: 5+ Billion People** 🌍
-
+<img src="images/architecture.svg" width="600" alt="Architecture">
 </div>
 
-### How to Switch Languages
+**Content layer** (`content.js`, `content-restructurer.js`, `content-translator.js`) runs injected into every page. It handles DOM analysis, complexity scoring, focus mode rendering, the reading beam overlay, and real-time restructuring. It communicates with the background worker via Chrome message passing.
 
-1. Click the Pudding icon in your browser toolbar
-2. Find the language selector in the top-right corner (next to settings ⚙️)
-3. Select your preferred language from the dropdown
-4. The entire UI updates instantly!
-5. Your language preference is saved automatically
+**Background worker** (`background.js`) manages the Gemini Nano AI session, routes simplification requests, handles per-domain state, and coordinates with HydraDB for reading session ingestion and preference retrieval at the start of each session.
 
-### What Gets Translated
+**Cognitive modules** are individual focused scripts: `cognitive-tracker.js` handles behavioral signal collection, `fatigue-detector.js` interprets those signals into fatigue state, `complexity-analyzer.js` scores text sections, `focus-mode.js` manages the distraction-removal overlay, `reading-beam.js` handles the paragraph spotlight, and `smart-auto-mode.js` ties them together into the adaptive engine.
 
-✅ All UI elements (buttons, labels, tooltips)  
-✅ Simplification levels (Low/Mid/High)  
-✅ Feature names and descriptions  
-✅ Settings page  
-✅ Help text and guides  
+**Popup and options UI** (`popup.js`, `popup.html`, `popup.css`, `options.js`, `options.html`) provide the user controls. The popup gives quick access to all features. The options page handles language, font, and per-site preferences.
 
-### Technical Details
-
-Powered by **Lingo.dev**, our multilingual support:
-- Uses structured i18n configuration
-- Loads translations instantly (< 10ms)
-- Supports RTL languages (Arabic)
-- Maintains accessibility features across all languages
-- Zero impact on extension performance
-
-📖 **Learn more**: [Lingo.dev Integration Documentation](LINGO_INTEGRATION.md)
-
----
-
-## Installation
-
-### Prerequisites
+**Memory layer** (HydraDB) stores user preferences, reading session history, and adaptation outcomes across sessions. Covered in detail in the next section.
 
 <div align="center">
-
-| Requirement | Details |
-|------------|---------|
-| **Browser** | Chrome Dev/Canary ≥ 128.0.6545.0 |
-| **Storage** | 22 GB free space |
-| **OS** | Windows, macOS, Linux |
-
+<img src="images/privacy-architecture.svg" width="600" alt="Privacy Architecture">
 </div>
 
-### Step 1: Enable Gemini Nano
-
-```bash
-# Open Chrome Dev/Canary and navigate to:
-chrome://flags/#optimization-guide-on-device-model
-→ Select "Enabled BypassPerfRequirement"
-
-chrome://flags/#prompt-api-for-gemini-nano
-→ Select "Enabled"
-
-# Relaunch Chrome
-```
-
-### Step 2: Install Extension
-
-```bash
-# Clone repository
-git clone https://github.com/Tasfia-17/pudding-ext.git
-
-# Open Chrome
-chrome://extensions/
-
-# Enable "Developer mode" (top right)
-# Click "Load unpacked"
-# Select the Pudding directory
-```
-
-### Step 3: Verify Installation
-
-1. Look for 🍮 Pudding icon in toolbar
-2. Open any article webpage
-3. Click Pudding icon
-4. Try "Simplify Text" button
+The AI processing uses Chrome's built-in Gemini Nano, which runs entirely on-device. No text content from any page is ever sent to an external API.
 
 ---
 
-## Usage
+## How We Built It
 
-### Basic Workflow
+### Starting with Users
 
-1. Navigate to any article or webpage
-2. Click the Pudding icon in toolbar
-3. Select simplification level (Low/Mid/High)
-4. Choose optimization mode:
-   - Simplify Complex Ideas
-   - Better Visual Organization  
-   - Easier Reading Flow
-5. Click "Simplify Text"
+We did not write a single line of feature code before talking to neurodivergent users. We interviewed students with dyslexia and ADHD, asked them to walk us through a typical reading session, and listened to where they got stuck. What we heard repeatedly was that existing tools feel like they were designed for someone else and then made accessible as an afterthought. They wanted something that felt built for them from the start.
 
-### Advanced Features
+That shaped every decision. The reading beam came directly from a user with visual tracking difficulties telling us that the hardest part of reading online was keeping their place in a long paragraph. The fatigue detector thresholds were set by asking users to tell us when they noticed their comprehension dropping and calibrating to those moments. The Focus Mode keyboard navigation came from a user who said using a mouse while reading broke their concentration.
 
-**Focus Mode:**
-```
-Click Pudding → Focus Mode → Navigate with arrows → Exit Focus
-```
+### AI Integration
 
-**Complexity Map:**
-```
-Click Pudding → Complexity Map → Click any red badge → Simplify
-```
+The simplification engine uses Chrome's built-in Gemini Nano accessed through the Prompt API. This was a deliberate choice. Running AI on-device means no latency from network calls, no API costs, and no privacy risk from sending page content to a remote server. It also means the extension works fully offline.
 
-**Adaptive Mode:**
-```
-Click Pudding → Adaptive Mode → Read naturally → Auto-adjusts
-```
+The complexity analyzer uses a combination of readability formulas (Flesch-Kincaid adapted for browser use), vocabulary frequency scoring against a common word list, and sentence structure analysis to produce per-paragraph scores. This runs synchronously in the content script without any AI call, so the heatmap appears instantly.
 
----
+Simplification requests are batched and queued through the background worker to avoid overloading the Gemini Nano session. The worker maintains a single AI session per browser window and reuses it across requests.
 
-## Impact
+### Persistent Memory with HydraDB
 
-<div align="center">
+The adaptive engine is only useful if it can remember things across sessions. We used HydraDB as the unified context substrate for all persistent state.
 
-### Measurable Results
+HydraDB is designed for AI agents that need to hold three kinds of memory: user preferences that persist across sessions, semantic knowledge that the agent reasons over, and episodic experiences that are time-ordered events from past interactions. Pudding uses all three.
 
-| Metric | Improvement |
-|--------|-------------|
-| **Cognitive Load** | 37% reduction |
-| **Reading Speed** | 45% faster |
-| **Comprehension** | 52% better |
-| **Focus Time** | 3x longer |
+**What we store:**
 
-</div>
+| Memory type | What Pudding writes |
+|---|---|
+| User preferences | Preferred simplification level, font choice, language, focus mode settings, per-site overrides |
+| Reading sessions | Scroll speed, pause patterns, reread counts, fatigue events, time of day |
+| Adaptation outcomes | Which restructuring mode worked on which content type, per domain |
+| Cognitive profile | Aggregated behavioral patterns across sessions, auto-inferred by HydraDB's knowledge graph |
 
----
-
-## Target Users
-
-<table>
-<tr>
-<td width="25%" align="center">
-<h3>ADHD</h3>
-Focus mode<br/>
-Distraction suppression<br/>
-Structured content
-</td>
-<td width="25%" align="center">
-<h3>Dyslexia</h3>
-OpenDyslexic font<br/>
-Visual organization<br/>
-Reading flow
-</td>
-<td width="25%" align="center">
-<h3>Students</h3>
-Complexity mapping<br/>
-Quick summaries<br/>
-Study efficiency
-</td>
-<td width="25%" align="center">
-<h3>Professionals</h3>
-Fast scanning<br/>
-Key point extraction<br/>
-Time-saving
-</td>
-</tr>
-</table>
-
----
-
-## Roadmap
-
-- [ ] 🎧 Voice Layer with synchronized highlighting
-- [ ] 📚 Study Mode with flashcards and concept maps
-- [ ] 🌙 Time-based adaptation (late-night simplification)
-- [ ] 👥 Classroom Mode for teachers
-- [ ] 🔄 Cross-device profile sync
-- [x] 🌍 Multi-language support (10 languages live!)
-
----
-
-## Contributing
-
-We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
----
-
-## License
-
-MIT License - see [LICENSE](LICENSE) for details.
-
----
-
-## 🧠 Powered by HydraDB
-
-Pudding uses [HydraDB](https://hydradb.com) as its unified context substrate - the memory layer that makes cognitive adaptation actually *persist* across sessions and *personalize* to each user over time.
-
-### The Problem HydraDB Solves for Us
-
-Pudding's adaptation engine needs to remember things: how fast you read, which simplification level worked last time, which sites overwhelmed you, and how your fatigue patterns shift through the day. Without persistent memory, every session starts from zero and the "adaptive" part of Cognitive Adaptation Engine is effectively a lie.
-
-Standard vector search wasn't enough. It finds similar text - it can't answer "how has this user's reading behavior changed over the last week?" or return different context to a student vs. a teacher querying the same article. We needed a context layer that holds **user memories**, **semantic knowledge**, and **episodic experiences** in one place.
-
-HydraDB gave us exactly that.
-
-### What We Store
-
-| Memory type | What Pudding writes | HydraDB call |
-|---|---|---|
-| **User preferences** | Preferred simplification level, font, language, focus mode settings | `hydradb_ingest` (text, `infer: true`) |
-| **Reading sessions** | Per-site scroll speed, pause patterns, reread counts, fatigue events | `hydradb_ingest` (turns / episodic) |
-| **Adaptation outcomes** | Which restructuring mode improved comprehension on a given content type | `hydradb_ingest` with `source_id` per domain |
-| **Cognitive profile** | Aggregated reading behavior over time, built automatically by HydraDB's graph | auto-inferred by HydraDB |
-
-### How We Query
-
-When you open a new page, Pudding calls `hydradb_query` before applying any transformation:
+At the start of each reading session, before any content is transformed, Pudding queries HydraDB for the user's context:
 
 ```js
-// Retrieve personalized context before adapting content
 const context = await hydradb.query({
   query: "reading preferences and fatigue history for this user",
-  mode: "thinking",        // graph traversal - not just similarity
-  graph_context: true      // pull entity relationships, not just chunks
+  mode: "thinking",
+  graph_context: true
 });
 ```
 
-The `thinking` recall mode (vs. `fast`) uses graph traversal to surface *relevant* history, not just *similar* text - so Pudding gets "this user struggles with dense academic paragraphs on news sites" rather than a raw list of past sessions.
+The `thinking` mode uses graph traversal rather than pure similarity search. This means the query returns reasoning like "this user consistently needs higher simplification on long-form content in the evening" rather than just a list of past sessions. The `graph_context` flag pulls in the relationship between those data points, not just the raw chunks.
 
-### Session Ingestion
-
-At the end of each reading session, Pudding ingests the interaction as a conversation turn:
+At the end of each session, the interaction is ingested as a conversation:
 
 ```js
 await hydradb.ingest({
-  turns: sessionTurns,      // user actions + extension responses
+  turns: sessionTurns,
   title: `Session: ${domain}`,
-  source_id: userId,        // groups all sessions per user
-  infer: true               // HydraDB extracts preferences + updates graph
+  source_id: userId,
+  infer: true
 });
 ```
 
-HydraDB's automatic knowledge graph extraction means we never have to hand-write "this user has ADHD-style focus patterns" - it infers those relationships from accumulated session data.
+Setting `infer: true` tells HydraDB to automatically extract insights and update the knowledge graph. We never manually write "this user has ADHD-style focus patterns." HydraDB infers that from the accumulated session data and makes it available on the next query.
 
-### MCP Integration (Dev Tooling)
-
-During development and testing we used the [HydraDB MCP server](https://github.com/usecortex/hydradb-mcp) to inspect and query the memory store directly from our editor:
+During development we used the HydraDB MCP server to inspect the memory store directly from the editor:
 
 ```json
 {
@@ -486,71 +267,130 @@ During development and testing we used the [HydraDB MCP server](https://github.c
 }
 ```
 
-This let us run `hydradb_list`, `hydradb_inspect`, and `hydradb_query` directly during debugging to verify that user profiles were being built correctly without writing separate test scripts.
+This let us run `hydradb_list` and `hydradb_inspect` to verify profiles were being built correctly without writing separate debugging scripts. We also used the HydraDB CLI for bulk session inspection during test runs.
 
-We also used the [HydraDB CLI](https://github.com/usecortex/hydradb-cli) to bulk-inspect stored sessions and validate that the cognitive profile graph was accumulating correctly after test runs.
+HydraDB resources: [Docs](https://docs.hydradb.com) · [MCP Server](https://github.com/usecortex/hydradb-mcp) · [CLI](https://github.com/usecortex/hydradb-cli)
 
-### Why It Mattered for Accessibility
+### Multilingual Support with Lingo.dev
 
-The neurodivergent users we tested with have *highly variable* needs - not just user-to-user, but session-to-session for the same person (fatigue, time of day, content type). A static preference file doesn't cut it.
-
-HydraDB's episodic memory layer - which retains time-ordered events from every agent interaction - is what lets Pudding's smart auto-mode detect "this user tends to need higher simplification after 20 minutes of reading" and act on it proactively, before the user has to ask.
-
-**Resources:**
-- 📖 [HydraDB Docs](https://docs.hydradb.com)
-- 🔌 [HydraDB MCP Server](https://github.com/usecortex/hydradb-mcp)
-- 🖥️ [HydraDB CLI](https://github.com/usecortex/hydradb-cli)
+Making Pudding multilingual was not just an add-on feature. Cognitive accessibility tools that only work in English exclude the majority of the world's neurodivergent learners. We used Lingo.dev to add structured i18n across the full UI, covering all buttons, labels, tooltips, settings, and simplification output across 10 languages including full RTL support for Arabic.
 
 ---
 
-## Acknowledgments
-
-- **HydraDB** for the unified context substrate powering adaptive memory
-- **Chrome AI Team** for Gemini Nano
-- **OpenDyslexic** for the accessibility font
-- **Accessibility Community** for feedback and inspiration
-
----
-
-
-
-
-We integrated i18n to make Pudding accessible in 10 languages, expanding our reach from 1.5B to 5B+ people worldwide.
-
-### Key Achievements
-
-- ✅ **10 languages** implemented (EN, ES, FR, DE, AR, ZH, JA, HI, PT, BN)
-- ✅ **RTL support** for Arabic
-- ✅ **Instant language switching** with persistent preferences
-- ✅ **Zero performance impact** (< 10ms translation load)
-- ✅ **Complete UI coverage** (all elements translated)
-
-### Impact
-
-**Before**: Accessibility tool for English speakers only  
-**After**: Global accessibility reaching 5+ billion people in their native languages
-
-### Documentation
-
-- 📖 [Full Integration Story](LINGO_INTEGRATION.md)
-- 🎬 [Demo Guide](DEMO_GUIDE.md)
-- ⚙️ [i18n Configuration](i18n.json)
-
-**Making accessibility truly global, one language at a time.** 🌍✨
-
----
+## Impact
 
 <div align="center">
 
-### Made with care for cognitive accessibility
-
-**[Star us on GitHub](https://github.com/Tasfia-17/pudding-ext)** • **[Report Issues](https://github.com/Tasfia-17/pudding-ext/issues)** • **[Discussions](https://github.com/Tasfia-17/pudding-ext/discussions)**
-
-<br><br>
-
-<img src="images/pudding-logo.svg" width="80" alt="Pudding">
+| Metric | Improvement |
+|--------|-------------|
+| Cognitive Load | 37% reduction |
+| Reading Speed | 45% faster |
+| Comprehension | 52% better |
+| Focus Time | 3x longer |
 
 </div>
+
+---
+
+## Who Pudding is For
+
+<table>
+<tr>
+<td width="25%" align="center">
+<h3>ADHD</h3>
+Focus mode<br/>
+Distraction suppression<br/>
+Structured content
+</td>
+<td width="25%" align="center">
+<h3>Dyslexia</h3>
+OpenDyslexic font<br/>
+Visual organization<br/>
+Reading beam
+</td>
+<td width="25%" align="center">
+<h3>Students</h3>
+Complexity mapping<br/>
+Quick summaries<br/>
+Study efficiency
+</td>
+<td width="25%" align="center">
+<h3>Everyone</h3>
+Fast scanning<br/>
+Key point extraction<br/>
+10 languages
+</td>
+</tr>
+</table>
+
+---
+
+## Installation
+
+### Requirements
+
+| Requirement | Details |
+|------------|---------|
+| Browser | Chrome Dev/Canary 128.0.6545.0 or later |
+| Storage | 22 GB free (for Gemini Nano model) |
+| OS | Windows, macOS, Linux |
+
+### Step 1: Enable Gemini Nano
+
+```bash
+# Open Chrome Dev/Canary and go to:
+chrome://flags/#optimization-guide-on-device-model
+# Set to: Enabled BypassPerfRequirement
+
+chrome://flags/#prompt-api-for-gemini-nano
+# Set to: Enabled
+
+# Relaunch Chrome
+```
+
+### Step 2: Install the Extension
+
+```bash
+git clone https://github.com/Tasfia-17/pudding-ext.git
+```
+
+Then open `chrome://extensions/`, enable Developer mode, click Load unpacked, and select the cloned directory.
+
+### Step 3: Verify
+
+Look for the Pudding icon in your toolbar. Open any article and click it. Hit Simplify Text to confirm the extension is working.
+
+---
+
+## Usage
+
+### Basic
+
+1. Navigate to any article or webpage
+2. Click the Pudding icon in the toolbar
+3. Select a simplification level: Low, Mid, or High
+4. Choose a mode: Simplify Complex Ideas, Better Visual Organization, or Easier Reading Flow
+5. Click Simplify Text
+
+### Advanced
+
+Focus Mode: `Pudding icon > Focus Mode > arrow keys to navigate > Esc to exit`
+
+Complexity Map: `Pudding icon > Complexity Map > click any red badge to simplify that section`
+
+Adaptive Mode: `Pudding icon > Adaptive Mode > read normally, extension auto-adjusts`
+
+---
+
+## Roadmap
+
+- [x] 10-language support via Lingo.dev
+- [x] Persistent adaptive memory via HydraDB
+- [ ] Voice layer with synchronized highlighting
+- [ ] Study mode with flashcards and concept maps
+- [ ] Time-based adaptation (late-night mode)
+- [ ] Classroom mode for teachers
+- [ ] Cross-device profile sync
 
 ---
 
@@ -573,16 +413,16 @@ Build AI tools that actually work for neurodivergent learners - by the community
 
 Pudding was built for Track 1 - tools for neurodivergent K-12 students that adapt to the student, not the other way around. Specifically:
 
-- Real-time text reformatting for dyslexia - font switching (OpenDyslexic), spacing, color overlays, read-aloud with synced highlighting
-- Task-initiation support for ADHD - focus mode, distraction suppression, structured chunking
-- Sensing disengagement - cognitive fatigue detector that shifts approach before a student gives up
-- Turning abstract concepts into visual representations - complexity heatmaps and structured reformatting
+- Real-time text reformatting for dyslexia: font switching (OpenDyslexic), spacing, color overlays, read-aloud with synced highlighting
+- Task-initiation support for ADHD: focus mode, distraction suppression, structured chunking
+- Sensing disengagement: cognitive fatigue detector that shifts approach before a student gives up
+- Turning abstract concepts into visual representations: complexity heatmaps and structured reformatting
 
 ### Why IncludAI
 
-> "Most AI tools in education were built for a narrow definition of 'normal.' Students with ADHD, autism, dyslexia, and sensory processing differences spend every day working around technology that was never designed for them."
+> "Most AI tools in education were built for a narrow definition of normal. Students with ADHD, autism, dyslexia, and sensory processing differences spend every day working around technology that was never designed for them."
 
-We started with a different question: "What would this tool look like if a neurodivergent user were the primary user from day one?"
+We started with a different question: what would this tool look like if a neurodivergent user were the primary user from day one?
 
 Pudding is our answer.
 
@@ -590,13 +430,46 @@ Pudding is our answer.
 
 Following the hackathon's core requirement - designed WITH, not just FOR - we involved neurodivergent users at every stage:
 
-- Interviewed students with dyslexia and ADHD before building
-- Tested each feature with real users and iterated based on their feedback
+- Interviewed students with dyslexia and ADHD before writing any feature code
+- Tested each feature with real users and iterated directly based on what they told us
 - Validated the OpenDyslexic font integration, reading beam, and focus mode with users who have visual tracking difficulties
-- Fatigue detection thresholds tuned based on user-reported overload patterns
+- Calibrated fatigue detection thresholds based on user-reported overload patterns
 
 ### About IncludAI
 
 Organized by **IncludEDU**, a global student-led non-profit dedicated to inclusive education, in partnership with the **Stanford NNEA** (Network for K-12 Neurodiversity Education and Advocacy).
 
-Winners present at the 2026 Stanford Neurodiversity Summit (Sept 19-21). Join the community: [contact@includedu.org](mailto:contact@includedu.org) · NNEA: [neurodiversity.nnea@gmail.com](mailto:neurodiversity.nnea@gmail.com)
+Winners present at the 2026 Stanford Neurodiversity Summit (Sept 19-21).
+
+Join the community: [contact@includedu.org](mailto:contact@includedu.org)
+NNEA: [neurodiversity.nnea@gmail.com](mailto:neurodiversity.nnea@gmail.com)
+
+---
+
+## License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+---
+
+## Acknowledgments
+
+- **HydraDB** for the persistent context and adaptive memory layer
+- **Lingo.dev** for multilingual i18n support across 10 languages
+- **Chrome AI Team** for Gemini Nano on-device AI
+- **OpenDyslexic** for the dyslexia-friendly font
+- **IncludEDU and Stanford NNEA** for running a hackathon that centers neurodivergent users
+
+---
+
+<div align="center">
+
+Made with care for cognitive accessibility
+
+**[Star on GitHub](https://github.com/Tasfia-17/pudding-ext)** · **[Report Issues](https://github.com/Tasfia-17/pudding-ext/issues)** · **[Discussions](https://github.com/Tasfia-17/pudding-ext/discussions)**
+
+<br>
+
+<img src="images/pudding-logo.svg" width="80" alt="Pudding">
+
+</div>
