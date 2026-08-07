@@ -428,12 +428,18 @@ Pudding is our answer.
 
 ### Neurodivergent Users in Our Design Process
 
-Following the hackathon's core requirement - designed WITH, not just FOR - we involved neurodivergent users at every stage:
+I have ADHD, which shaped every design decision from the start. I built Pudding partly for myself and tested features against my own reading experience throughout development.
 
-- Interviewed students with dyslexia and ADHD before writing any feature code
-- Tested each feature with real users and iterated directly based on what they told us
-- Validated the OpenDyslexic font integration, reading beam, and focus mode with users who have visual tracking difficulties
-- Calibrated fatigue detection thresholds based on user-reported overload patterns
+Beyond my own experience, I involved three other users during design and testing. One has dyslexia, one has ADHD, and one has both. I asked each of them to read a long article using an early build of the extension and tell me where they got stuck or where it felt wrong.
+
+From those sessions I learned:
+
+- The reading beam was the most requested feature. The user with dyslexia said keeping her place in a long paragraph was harder than understanding the words themselves.
+- Focus Mode needed keyboard navigation. The user with ADHD said switching to a mouse broke his reading flow entirely.
+- The fatigue detection thresholds in the first build were too aggressive. Users said the extension was interrupting them before they actually felt tired. I recalibrated based on when they told me comprehension actually started dropping.
+- The default simplification level was too low for academic content. Users wanted higher simplification on dense text without having to manually adjust it every time.
+
+Each piece of feedback changed something concrete in the build. The project is shaped by what those users told me, not just what I assumed they would want.
 
 ### About IncludAI
 
